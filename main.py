@@ -1,26 +1,24 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
-userEnvSelection = ""
-userGoalSelection = ""
-userMoodSelection = ""
+class SelecionIn(BaseModel):
+    envSelction: str
+    goalSelection: str
+    moodSelection: str
+
+class SelectionOut(BaseModel):
+    envSelection: str
+    goalSelection: str
+    moodSelection: str
 
 
 @app.get("/")
 def read_root():
     return {"message": "Hello Srikar, how's Portugal?"}
 
-@app.post("/items/")
-def create_item(name: str, price: float):
-    return {"name:" : name, "price": price}
-
-
-@app.post("/selection")
-def select_env(envSelection: str, goalSelection: str, moodSelection: str):
+@app.post("/selection", response_model=SelectionOut)
+def select_env(selection: SelecionIn):
     
-    userEnvSelection = envSelection
-    userGoalSelection = goalSelection
-    userMoodSelection = moodSelection
-
-    return {"envSelection" : userEnvSelection, "goalSelection" : userGoalSelection, "moodSelection" : userMoodSelection}
+    return SelectionOut(**selection.model_dump())
