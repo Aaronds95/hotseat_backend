@@ -3,8 +3,8 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class SelecionIn(BaseModel):
-    envSelction: str
+class SelectionIn(BaseModel):
+    envSelection: str
     goalSelection: str
     moodSelection: str
 
@@ -19,6 +19,6 @@ def read_root():
     return {"message": "Hello Srikar, how's Portugal?"}
 
 @app.post("/selection", response_model=SelectionOut)
-def select_env(selection: SelecionIn):
+def select_env(selection: SelectionIn):
     
     return SelectionOut(**selection.model_dump())
