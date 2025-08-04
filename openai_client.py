@@ -6,7 +6,7 @@ import json
 load_dotenv()
 
 _client   = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-_PROMPTID = os.getenv("HOTSEAT_PROMPT_ID")               # <— NEW
+_PROMPTID = os.getenv("HOTSEAT_GAMES_PROMPT_ID")               # <— NEW
 
 client = OpenAI()
 
@@ -15,7 +15,7 @@ def generate_games(env, goal, mood):
     response = client.responses.create(
     prompt={
         "id": _PROMPTID,
-        "version": "2",
+        "version": "3",
         "variables": {
         "userenvselection": env,
         "usergoalselection": goal,
