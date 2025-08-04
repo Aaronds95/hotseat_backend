@@ -24,7 +24,7 @@ class SelectionResponse(BaseModel):
 def read_root():
     return {"message": "Hello Srikar, how's Portugal?"}
 
-@app.post("/selection", response_model=SelectionResponse)
+@app.post("/games", response_model=SelectionResponse)
 def select_env(selection: SelectionIn):
     data = generate_games(
         selection.envSelection, selection.goalSelection, selection.moodSelection
